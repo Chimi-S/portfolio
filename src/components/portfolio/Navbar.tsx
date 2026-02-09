@@ -31,7 +31,16 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
         <a href="/" className="cursor-pointer hover:opacity-80 transition-opacity">
-          <img src="/logo.png" alt="Chimi Thinly" className="h-8 w-auto" />
+          <img
+            src="/logo.png"
+            alt="Chimi Thinly"
+            className="h-8 w-auto"
+            width={32}
+            height={32}
+            decoding="async"
+            fetchPriority="high"
+            loading="eager"
+          />
         </a>
 
         {/* Desktop */}
