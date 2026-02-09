@@ -4,28 +4,24 @@ import { Mail, Phone, Linkedin, MapPin, ArrowUpRight } from "lucide-react";
 const contactLinks = [
 	{
 		icon: Mail,
-		label: "chimithinley705@gmail.com",
+		label: "Email",
 		href: "mailto:chimithinley705@gmail.com",
-		sublabel: "Drop me an email",
 	},
 	{
 		icon: Phone,
 		label: "0452 421 551",
 		href: "tel:0452421551",
-		sublabel: "Give me a call",
 	},
 	{
 		icon: Linkedin,
-		label: "linkedin.com/in/chimithinley",
+		label: "LinkedIn",
 		href: "https://www.linkedin.com/in/chimithinley",
-		sublabel: "Connect on LinkedIn",
 		external: true,
 	},
 	{
 		icon: MapPin,
 		label: "Perth, WA",
 		href: "#",
-		sublabel: "Based in Australia",
 	},
 ];
 
@@ -34,7 +30,7 @@ const ContactSection = () => {
 		<section className="hero-section py-16 sm:py-24 lg:py-32 relative overflow-hidden">
 			{/* Ambient glow */}
 			<div
-				className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] rounded-full opacity-[0.07]"
+				className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] rounded-full opacity-[0.07] pointer-events-none"
 				style={{
 					background:
 						"radial-gradient(circle, hsl(36, 80%, 50%), transparent 70%)",
@@ -45,8 +41,8 @@ const ContactSection = () => {
 				<motion.div
 					initial={{ opacity: 0, y: 20 }}
 					whileInView={{ opacity: 1, y: 0 }}
-					viewport={{ once: true }}
-					transition={{ duration: 0.5 }}
+					viewport={{ once: true, margin: "0px 0px -100px 0px" }}
+					transition={{ duration: 0.4 }}
 					className="text-center mb-12 sm:mb-16"
 				>
 					<p className="text-primary font-mono text-xs sm:text-sm mb-3 tracking-wider">
@@ -55,7 +51,7 @@ const ContactSection = () => {
 					<h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-hero-foreground mb-4">
 						Let's Build Something
 					</h2>
-					<p className="text-hero-muted text-base sm:text-lg max-w-xl mx-auto px-2">
+					<p className="text-hero-muted text-base sm:text-lg max-w-xl mx-auto">
 						Open to software development opportunities in Perth and beyond.
 					</p>
 				</motion.div>
@@ -67,26 +63,21 @@ const ContactSection = () => {
 							href={item.href}
 							target={item.external ? "_blank" : undefined}
 							rel={item.external ? "noreferrer" : undefined}
-							initial={{ opacity: 0, y: 20 }}
+							initial={{ opacity: 0, y: 10 }}
 							whileInView={{ opacity: 1, y: 0 }}
 							viewport={{ once: true }}
-							transition={{ delay: 0.2 + i * 0.1 }}
-							whileHover={{ y: -4, scale: 1.02 }}
-							whileTap={{ scale: 0.98 }}
-							className="glass-card-dark rounded-2xl p-4 sm:p-6 flex items-center gap-3 sm:gap-4 group hover:border-primary/30 transition-all duration-300 min-h-[80px] sm:min-h-auto"
+							transition={{ duration: 0.3, delay: i * 0.05 }}
+							className="glass-card-dark rounded-2xl p-4 sm:p-6 flex items-center gap-3 sm:gap-4 hover:shadow-lg transition-shadow duration-300 min-h-[70px] sm:min-h-auto"
 						>
-							<div className="w-10 sm:w-12 h-10 sm:h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-colors">
+							<div className="w-10 sm:w-12 h-10 sm:h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
 								<item.icon className="w-5 h-5 text-primary" />
 							</div>
 							<div className="flex-1 min-w-0">
-								<p className="text-hero-muted text-xs hidden sm:block">
-									{item.sublabel}
-								</p>
 								<p className="text-hero-foreground text-xs sm:text-sm font-medium truncate">
 									{item.label}
 								</p>
 							</div>
-							<ArrowUpRight className="w-4 h-4 text-hero-muted opacity-0 group-hover:opacity-100 group-hover:text-primary transition-all shrink-0 hidden sm:block" />
+							<ArrowUpRight className="w-4 h-4 text-hero-muted shrink-0 hidden sm:block" />
 						</motion.a>
 					))}
 				</div>

@@ -5,34 +5,19 @@ const skillGroups = [
 	{
 		category: "Backend",
 		icon: Server,
-		skills: [
-			"FastAPI",
-			"Laravel",
-			"Lumen",
-			"Python",
-			"PHP",
-			"REST APIs",
-			"Microservices",
-		],
+		skills: ["FastAPI", "Laravel", "Lumen", "Python", "PHP", "REST APIs"],
 	},
 	{
 		category: "Frontend",
 		icon: Monitor,
-		skills: [
-			"Vue.js",
-			"JavaScript",
-			"HTML5",
-			"CSS3",
-			"WordPress",
-			"Responsive Design",
-		],
+		skills: ["Vue.js", "JavaScript", "HTML5", "CSS3", "WordPress"],
 	},
 	{
 		category: "Database",
 		icon: Database,
 		skills: [
 			"PostgreSQL",
-			"Database Administration",
+			"Database Admin",
 			"Query Optimisation",
 			"Schema Design",
 		],
@@ -40,7 +25,7 @@ const skillGroups = [
 	{
 		category: "DevOps & Tools",
 		icon: Wrench,
-		skills: ["Git", "GitHub", "Agile / Scrum", "A/B Testing", "SEO"],
+		skills: ["Git", "GitHub", "Agile/Scrum", "A/B Testing", "SEO"],
 	},
 ];
 
@@ -51,8 +36,8 @@ const SkillsSection = () => {
 				<motion.div
 					initial={{ opacity: 0, y: 20 }}
 					whileInView={{ opacity: 1, y: 0 }}
-					viewport={{ once: true }}
-					transition={{ duration: 0.5 }}
+					viewport={{ once: true, margin: "0px 0px -100px 0px" }}
+					transition={{ duration: 0.4 }}
 					className="text-center mb-12 sm:mb-20"
 				>
 					<p className="text-primary font-mono text-xs sm:text-sm mb-3 tracking-wider">
@@ -67,32 +52,27 @@ const SkillsSection = () => {
 					{skillGroups.map((group, i) => (
 						<motion.div
 							key={group.category}
-							initial={{ opacity: 0, y: 30 }}
+							initial={{ opacity: 0, y: 20 }}
 							whileInView={{ opacity: 1, y: 0 }}
-							viewport={{ once: true }}
-							transition={{ duration: 0.5, delay: i * 0.12 }}
-							whileHover={{ y: -8 }}
-							className="glass-card rounded-2xl p-5 sm:p-8 group hover:glow-primary transition-all duration-500 cursor-default"
+							viewport={{ once: true, margin: "0px 0px -50px 0px" }}
+							transition={{ duration: 0.4, delay: i * 0.05 }}
+							className="glass-card rounded-2xl p-5 sm:p-6 hover:shadow-lg transition-shadow duration-300"
 						>
-							<div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 sm:mb-6 group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300">
+							<div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 sm:mb-6">
 								<group.icon className="w-6 h-6 text-primary" />
 							</div>
-							<h3 className="text-base sm:text-lg font-semibold font-sans mb-4 sm:mb-5">
+							<h3 className="text-base sm:text-lg font-semibold font-sans mb-4">
 								{group.category}
 							</h3>
 							<ul className="space-y-2">
-								{group.skills.map((skill, j) => (
-									<motion.li
+								{group.skills.map((skill) => (
+									<li
 										key={skill}
-										className="text-muted-foreground text-xs sm:text-sm flex items-center gap-2 group/skill"
-										initial={{ opacity: 0, x: -10 }}
-										whileInView={{ opacity: 1, x: 0 }}
-										viewport={{ once: true }}
-										transition={{ delay: 0.3 + j * 0.06 }}
+										className="text-muted-foreground text-xs sm:text-sm flex items-center gap-2"
 									>
-										<span className="w-1.5 h-1.5 rounded-full bg-primary/50 group-hover/skill:bg-primary group-hover/skill:scale-125 transition-all flex-shrink-0" />
+										<span className="w-1.5 h-1.5 rounded-full bg-primary/50 flex-shrink-0" />
 										<span>{skill}</span>
-									</motion.li>
+									</li>
 								))}
 							</ul>
 						</motion.div>
