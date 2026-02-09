@@ -29,7 +29,7 @@ export default defineConfig(({ mode }) => ({
     react(),
     mode === "production" &&
       compression({
-        algorithm: "brotli",
+        algorithm: "brotliCompress",
         ext: ".br",
       }),
   ].filter(Boolean),
