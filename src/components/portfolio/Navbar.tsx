@@ -30,8 +30,8 @@ const Navbar = () => {
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
       <div className="container mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
-        <a href="/" className="text-lg font-bold text-primary cursor-pointer hover:opacity-80 transition-opacity">
-          CT
+        <a href="/" className="cursor-pointer hover:opacity-80 transition-opacity">
+          <img src="/logo.png" alt="Chimi Thinly" className="h-8 w-auto" />
         </a>
 
         {/* Desktop */}
