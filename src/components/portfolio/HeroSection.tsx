@@ -2,12 +2,12 @@ import { useEffect, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Mail, Phone, Linkedin, MapPin, ArrowDown, Code2, Database, Server } from "lucide-react";
 
-const FloatingOrb = ({ delay, size, x, y }: { delay: number; size: number; x: string; y: string }) => (
+const FloatingOrb = ({ delay, size, x, y, isMobile }: { delay: number; size: number; x: string; y: string; isMobile: boolean }) => (
   <motion.div
     className="absolute rounded-full"
     style={{
-      width: size,
-      height: size,
+      width: isMobile ? size * 0.5 : size,
+      height: isMobile ? size * 0.5 : size,
       left: x,
       top: y,
       background: `radial-gradient(circle, hsla(36, 80%, 50%, 0.15), transparent 70%)`,
@@ -27,7 +27,7 @@ const FloatingOrb = ({ delay, size, x, y }: { delay: number; size: number; x: st
 );
 
 const TypewriterText = ({ text, delay = 0 }: { text: string; delay?: number }) => (
-  <motion.span className="font-mono text-primary text-sm">
+  <motion.span className="font-mono text-primary text-xs sm:text-sm">
     {text.split("").map((char, i) => (
       <motion.span
         key={i}
@@ -55,13 +55,15 @@ const StatItem = ({ value, label, delay }: { value: string; label: string; delay
     transition={{ delay, duration: 0.6 }}
     className="text-center"
   >
-    <div className="text-3xl sm:text-4xl font-serif font-bold text-gradient glow-text">{value}</div>
+    <div className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold text-gradient glow-text">{value}</div>
     <div className="text-hero-muted text-xs mt-1 uppercase tracking-wider">{label}</div>
   </motion.div>
 );
 
 const HeroSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end start"],
@@ -71,33 +73,33 @@ const HeroSection = () => {
 
   return (
     <section ref={sectionRef} className="hero-section min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Animated grid */}
-      <div className="absolute inset-0 opacity-[0.04]" style={{
+      {/* Animated grid - hidden on mobile for better performance */}
+      <div className="absolute inset-0 opacity-[0.04] hidden sm:block" style={{
         backgroundImage: "linear-gradient(hsl(var(--hero-foreground)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--hero-foreground)) 1px, transparent 1px)",
         backgroundSize: "80px 80px",
       }} />
 
-      {/* Floating orbs */}
-      <FloatingOrb delay={0} size={300} x="70%" y="10%" />
-      <FloatingOrb delay={2} size={200} x="10%" y="60%" />
-      <FloatingOrb delay={4} size={150} x="80%" y="70%" />
+      {/* Floating orbs - scaled down on mobile */}
+      <FloatingOrb delay={0} size={300} x="70%" y="10%" isMobile={isMobile} />
+      <FloatingOrb delay={2} size={200} x="10%" y="60%" isMobile={isMobile} />
+      <FloatingOrb delay={4} size={150} x="80%" y="70%" isMobile={isMobile} />
 
-      {/* Gradient line accent */}
+      {/* Gradient line accent - hidden on mobile */}
       <motion.div
-        className="absolute left-[10%] top-0 w-px h-full line-gradient opacity-20"
+        className="absolute left-[10%] top-0 w-px h-full line-gradient opacity-20 hidden sm:block"
         initial={{ scaleY: 0 }}
         animate={{ scaleY: 1 }}
         transition={{ duration: 1.5, ease: "easeOut" }}
         style={{ transformOrigin: "top" }}
       />
 
-      <motion.div style={{ opacity, y }} className="container mx-auto px-6 py-20 relative z-10">
+      <motion.div style={{ opacity, y }} className="container mx-auto px-4 sm:px-6 py-16 sm:py-20 relative z-10">
         <div className="max-w-5xl">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3, duration: 0.6 }}
-            className="flex items-center gap-3 mb-8"
+            className="flex items-center gap-3 mb-6 sm:mb-8"
           >
             <div className="flex gap-1.5">
               <motion.div
@@ -112,7 +114,7 @@ const HeroSection = () => {
           </motion.div>
 
           <motion.h1
-            className="text-5xl sm:text-7xl lg:text-[6.5rem] font-bold leading-[0.92] mb-8"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-[6.5rem] font-bold leading-tight sm:leading-[0.92] mb-6 sm:mb-8"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
@@ -135,7 +137,7 @@ const HeroSection = () => {
           </motion.h1>
 
           <motion.p
-            className="text-hero-muted text-lg sm:text-xl max-w-2xl leading-relaxed mb-14"
+            className="text-hero-muted text-base sm:text-lg lg:text-xl max-w-2xl leading-relaxed mb-10 sm:mb-14"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.6 }}
@@ -144,9 +146,9 @@ const HeroSection = () => {
             Specialising in full-stack development, database architecture, and Agile delivery.
           </motion.p>
 
-          {/* Stats row */}
+          {/* Stats row - stacks on very small screens */}
           <motion.div
-            className="flex gap-10 sm:gap-16 mb-14"
+            className="flex flex-wrap gap-6 sm:gap-10 lg:gap-16 mb-10 sm:mb-14"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8 }}
@@ -156,9 +158,9 @@ const HeroSection = () => {
             <StatItem value="10+" label="Projects" delay={1.1} />
           </motion.div>
 
-          {/* Contact links as glass pills */}
+          {/* Contact links as glass pills - scrollable on mobile */}
           <motion.div
-            className="flex flex-wrap gap-3"
+            className="flex flex-wrap gap-2 sm:gap-3"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.0, duration: 0.6 }}
@@ -174,12 +176,12 @@ const HeroSection = () => {
                 href={item.href}
                 target={item.external ? "_blank" : undefined}
                 rel={item.external ? "noreferrer" : undefined}
-                className="glass-card-dark rounded-full px-5 py-2.5 flex items-center gap-2.5 text-sm text-hero-muted hover:text-primary hover:border-primary/30 transition-all duration-300 group"
+                className="glass-card-dark rounded-full px-3 sm:px-5 py-2 sm:py-2.5 flex items-center gap-2 text-xs sm:text-sm text-hero-muted hover:text-primary hover:border-primary/30 transition-all duration-300 group whitespace-nowrap"
                 whileHover={{ y: -2, scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <item.icon className="w-4 h-4 group-hover:text-primary transition-colors" />
-                <span>{item.label}</span>
+                <item.icon className="w-4 h-4 group-hover:text-primary transition-colors flex-shrink-0" />
+                <span className="hidden sm:inline">{item.label}</span>
               </motion.a>
             ))}
           </motion.div>
@@ -203,7 +205,7 @@ const HeroSection = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2"
+        className="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2"
       >
         <motion.a
           href="#experience"

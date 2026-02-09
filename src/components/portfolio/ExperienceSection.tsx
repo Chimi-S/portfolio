@@ -60,23 +60,23 @@ const jobs: Job[] = [
 
 const ExperienceSection = () => {
   return (
-    <section id="experience" className="py-20 relative">
-      {/* Timeline line */}
+    <section id="experience" className="py-16 sm:py-20 relative">
+      {/* Timeline line - hidden on mobile */}
       <div className="absolute left-6 md:left-1/2 top-[18rem] bottom-20 w-px bg-border hidden md:block" />
 
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-20"
+          className="text-center mb-12 sm:mb-20"
         >
-          <p className="text-primary font-mono text-sm mb-3 tracking-wider">{'<experience />'}</p>
-          <h2 className="text-4xl sm:text-6xl font-bold">Where I've Worked</h2>
+          <p className="text-primary font-mono text-xs sm:text-sm mb-3 tracking-wider">{'<experience />'}</p>
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold">Where I've Worked</h2>
         </motion.div>
 
-        <div className="space-y-8">
+        <div className="space-y-6 sm:space-y-8">
           {jobs.map((job, i) => (
             <motion.div
               key={i}
@@ -98,22 +98,22 @@ const ExperienceSection = () => {
 
               <div className={`md:w-[45%] ${i % 2 === 0 ? "md:mr-auto md:pr-12" : "md:ml-auto md:pl-12"}`}>
                 <motion.div
-                  className="glass-card rounded-2xl p-6 sm:p-8 group hover:glow-primary transition-shadow duration-500 cursor-default"
+                  className="glass-card rounded-2xl p-5 sm:p-6 lg:p-8 group hover:glow-primary transition-shadow duration-500 cursor-default"
                   whileHover={{ y: -4 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <div className="flex items-start justify-between mb-4">
-                    <div>
+                  <div className="flex items-start justify-between mb-4 gap-3">
+                    <div className="min-w-0">
                       <span className="font-mono text-xs text-primary">{job.period}</span>
-                      <h3 className="text-xl font-semibold font-sans mt-1">{job.title}</h3>
-                      <p className="text-muted-foreground text-sm">{job.company} · {job.location}</p>
+                      <h3 className="text-lg sm:text-xl font-semibold font-sans mt-1">{job.title}</h3>
+                      <p className="text-muted-foreground text-xs sm:text-sm">{job.company} · {job.location}</p>
                     </div>
                     <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-colors">
                       <Briefcase className="w-5 h-5 text-primary" />
                     </div>
                   </div>
 
-                  <ul className="space-y-2.5">
+                  <ul className="space-y-2">
                     {job.highlights.map((h, j) => (
                       <motion.li
                         key={j}
@@ -121,7 +121,7 @@ const ExperienceSection = () => {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.3 + j * 0.08 }}
-                        className="text-muted-foreground text-sm leading-relaxed flex gap-3 group/item"
+                        className="text-muted-foreground text-xs sm:text-sm leading-relaxed flex gap-2 group/item"
                       >
                         <ArrowUpRight className="w-3.5 h-3.5 text-primary mt-1 shrink-0 group-hover/item:translate-x-0.5 group-hover/item:-translate-y-0.5 transition-transform" />
                         <span>{h}</span>

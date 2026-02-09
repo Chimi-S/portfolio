@@ -29,7 +29,7 @@ const Navbar = () => {
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
-      <div className="container mx-auto px-6 flex items-center justify-between h-16">
+      <div className="container mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
         <motion.a
           href="/"
           className="relative group"
@@ -76,7 +76,7 @@ const Navbar = () => {
             transition={{ duration: 0.3 }}
             className="sm:hidden overflow-hidden bg-hero/95 backdrop-blur-xl border-b border-hero-foreground/5"
           >
-            <div className="px-6 py-4 space-y-1">
+            <div className="px-4 py-4 space-y-1">
               {links.map((l, i) => (
                 <motion.a
                   key={l.href}
