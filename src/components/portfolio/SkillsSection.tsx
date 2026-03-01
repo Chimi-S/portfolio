@@ -17,6 +17,9 @@ const skillGroups = [
 		icon: Database,
 		skills: [
 			"PostgreSQL",
+			"MySQL",
+			"MongoDB",
+			"Firebase",
 			"Database Admin",
 			"Query Optimisation",
 			"Schema Design",
