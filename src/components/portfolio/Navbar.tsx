@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
@@ -14,9 +14,17 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const { scrollY } = useScroll();
 
+  const logoRef = useRef<HTMLImageElement | null>(null);
+
   useMotionValueEvent(scrollY, "change", (latest) => {
     setScrolled(latest > 50);
   });
+
+  useEffect(() => {
+    if (logoRef.current) {
+      logoRef.current.setAttribute("fetchpriority", "high");
+    }
+  }, []);
 
   return (
     <motion.nav
@@ -38,7 +46,7 @@ const Navbar = () => {
             width={32}
             height={32}
             decoding="async"
-            fetchPriority="high"
+            ref={logoRef}
             loading="eager"
           />
         </a>
@@ -82,7 +90,13 @@ const Navbar = () => {
                 <a
                   key={l.href}
                   href={l.href}
-                  onClick={() => setOpen(false)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setOpen(false);
+                    setTimeout(() => {
+                      window.location.hash = l.href;
+                    }, 100);
+                  }}
                   className="block text-hero-muted hover:text-hero-foreground hover:bg-hero-foreground/5 text-sm transition-colors py-3 px-4 rounded-lg"
                 >
                   {l.label}
