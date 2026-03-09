@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import compression from "vite-plugin-compression";
+import { visualizer } from "rollup-plugin-visualizer";
 
 export default defineConfig(({ mode }) => ({
   server: {
@@ -31,6 +32,13 @@ export default defineConfig(({ mode }) => ({
       compression({
         algorithm: "brotliCompress",
         ext: ".br",
+      }),
+    mode === "production" &&
+      visualizer({
+        open: true,
+        gzipSize: true,
+        brotliSize: true,
+        filename: "dist/bundle-analysis.html",
       }),
   ].filter(Boolean),
   resolve: {
