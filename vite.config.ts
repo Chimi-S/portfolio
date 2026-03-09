@@ -19,7 +19,6 @@ export default defineConfig(({ mode }) => ({
       output: {
         manualChunks: {
           "vendor-motion": ["framer-motion"],
-          "vendor-ui": ["@radix-ui/react-dialog", "@radix-ui/react-dropdown-menu"],
           "vendor-query": ["@tanstack/react-query"],
         },
       },
